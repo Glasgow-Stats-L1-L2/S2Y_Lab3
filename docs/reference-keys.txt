@@ -1,0 +1,15 @@
+eq:SLR
+eq:LSE
+eq:sigma
+fig:unnamed-chunk-16
+fig:unnamed-chunk-17
+fig:unnamed-chunk-21
+welcome-to-s2y-lab-3
+introduction
+example-1-multiple-linear-regression
+least-squares-estimates-of-model-parameters-using-vector-matrix-form
+exercise-1-the-taste-of-cheese
+optional-reparameterising-the-model
+multiple-linear-regression
+solution
+task-1

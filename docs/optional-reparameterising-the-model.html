@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 (optional) Reparameterising the model | main.knit</title>
+  <meta name="description" content="S2Y Lab 3<br />
+Linear models in vector-matrix form</div>" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 (optional) Reparameterising the model | main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 (optional) Reparameterising the model | main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exercise-1-the-taste-of-cheese.html"/>
+<link rel="next" href="solution.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="include/webex.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome to S2Y Lab 3</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="example-1-multiple-linear-regression.html"><a href="example-1-multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Example 1: Multiple linear regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="example-1-multiple-linear-regression.html"><a href="example-1-multiple-linear-regression.html#least-squares-estimates-of-model-parameters-using-vector-matrix-form"><i class="fa fa-check"></i><b>2.1</b> Least squares estimates of model parameters using vector-matrix form</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="exercise-1-the-taste-of-cheese.html"><a href="exercise-1-the-taste-of-cheese.html"><i class="fa fa-check"></i><b>3</b> Exercise 1: The taste of cheese</a></li>
+<li class="chapter" data-level="4" data-path="optional-reparameterising-the-model.html"><a href="optional-reparameterising-the-model.html"><i class="fa fa-check"></i><b>4</b> (optional) Reparameterising the model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="optional-reparameterising-the-model.html"><a href="optional-reparameterising-the-model.html#multiple-linear-regression"><i class="fa fa-check"></i><b>4.1</b> Multiple linear regression</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="solution.html"><a href="solution.html"><i class="fa fa-check"></i><b>5</b> Solution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="solution.html"><a href="solution.html#task-1"><i class="fa fa-check"></i><b>5.1</b> Task 1</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">S2Y Lab 3<br />
+Linear models in vector-matrix form</div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="optional-reparameterising-the-model" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> (optional) Reparameterising the model<a href="optional-reparameterising-the-model.html#optional-reparameterising-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In <strong>Chapter 3</strong> of the lecture notes, we will learn that reparameterising a linear model can make some of the calculations simpler. Today let's try to reparameterise the simple linear regression model <a href="index.html#eq:SLR">(1.1)</a>. Suppose we go from</p>
+<p><span class="math display">\[Y_i = \alpha + \beta x_i + \epsilon_i\]</span></p>
+<p><span class="math display">\[\Big\downarrow\]</span></p>
+<p><span class="math display">\[Y_i = \alpha + \beta (x_i - \bar{x}) + \epsilon_i\]</span></p>
+<p>That is, we subtract the average % dropout rate from each of the observed rates for each state, thus mean centering the % dropout rate. However, as we will see, this changes our interpretation of the model results.</p>
+<p><br></p>
+<p><strong>QUESTION 2</strong></p>
+<ol style="list-style-type: lower-alpha">
+<li>Write down the reparameterised model using vector-matrix notation:</li>
+</ol>
+<p><span class="math display">\[\underbrace{\begin{bmatrix} &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ \end{bmatrix}}_{\mathbf{Y}} = \underbrace{\begin{bmatrix}
+&amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; \\
+\end{bmatrix}}_{\mathbf{X}} \underbrace{\begin{bmatrix} &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ \end{bmatrix}}_{\boldsymbol\beta} +  \underbrace{\begin{bmatrix} &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ \end{bmatrix}}_{\boldsymbol\epsilon} \]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Figures below display scatterplots of crime rate against % dropout, and crime rate against mean-centred % dropout. What does this tell us about the relationship between crime rate and the mean-centred % dropout in comparison with the % dropout?
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="main_files/figure-html/unnamed-chunk-16-1.png" alt="Top: crime rate vs. % dropout. Bottom: crime rate vs.  mean-centred % dropout." width="672" />
+<p class="caption">
+Figure 4.1: Top: crime rate vs. % dropout. Bottom: crime rate vs. mean-centred % dropout.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<img src="main_files/figure-html/unnamed-chunk-17-1.png" alt="Top: crime rate vs. % dropout. Bottom: crime rate vs.  mean-centred % dropout." width="672" />
+<p class="caption">
+Figure 4.2: Top: crime rate vs. % dropout. Bottom: crime rate vs. mean-centred % dropout.
+</p>
+</div>
+<br></li>
+</ol>
+<p>We can fit the reparameterised model using the following commands:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="optional-reparameterising-the-model.html#cb12-1" aria-hidden="true" tabindex="-1"></a>drop.centred <span class="ot">&lt;-</span> crime<span class="sc">$</span>Dropout <span class="sc">-</span> <span class="fu">mean</span>(crime<span class="sc">$</span>Dropout)</span>
+<span id="cb12-2"><a href="optional-reparameterising-the-model.html#cb12-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> drop.centred)</span></code></pre></div>
+<p>and obtain the model summary using:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="optional-reparameterising-the-model.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<p>Comparing the model summary from <code>model1</code> and <code>model2</code>, we can see that all of the statistics are the same, except for those for the intercept term, <span class="math inline">\(\alpha\)</span>. That is because, if we look again at the least squares estimates of the parameters (without reparameterisation)</p>
+<p><span class="math display">\[\hat{\boldsymbol\beta} = \begin{bmatrix} \hat{\alpha} \\[0.5em] \hat{\beta} \end{bmatrix} = \begin{bmatrix} \bar{y} - \hat{\beta} \bar{x} \\[0.5em] \frac{S_{xy}}{S_{xx}} \end{bmatrix},\]</span></p>
+<p><span class="math inline">\(\bar{x} = \sum_{i=1}^n x_i/n\)</span> denoted the mean % dropout. However, with the reparameterisation, <span class="math inline">\(\bar{x}\)</span>, in this case, say <span class="math inline">\(\bar{x}_c = \sum_{i=1}^n \left(x_i - \bar{x}\right)/n = 0\)</span>, and hence the estimate of the intercept term, <span class="math inline">\(\hat{\alpha} = \bar{y}\)</span>, i.e. the average US crime rate (per 100, 000 people).</p>
+<p>The intercept for the reparameterised model now takes on more meaning. It is the average crime rate when the predictor(s) are zero. For example, in <code>model2</code> the intercept <span class="math inline">\(\hat{\alpha} = 5085.2\)</span>, that is, the average crime rate, when the mean-centred % dropout is 0, which is equivalent to taking the average % dropout (i.e. <span class="math inline">\(\bar{x} = 10.252\)</span>) in <code>model1</code>. This is shown in figures below which display the fitted regression lines from both models, as well as the crime rate given the average % of high school dropouts.</p>
+<p><img src="main_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
+<img src="main_files/figure-html/unnamed-chunk-21-1.png" alt="Top: crime rate vs. % dropout with fitted line. Bottom: crime rate vs. mean-centred % dropout with fitted line. The dashed lines denote the crime rate given the average % of high school dropouts." width="672" />
+<p class="caption">
+Figure 4.3: Top: crime rate vs. % dropout with fitted line. Bottom: crime rate vs. mean-centred % dropout with fitted line. The dashed lines denote the crime rate given the average % of high school dropouts.
+</p>
+</div>
+<p>For <code>model1</code> our interpretation was that for every 1% increase in the % of high school dropouts, the expected crime rate (per 100, 000) increases by 281.8. For <code>model2</code> our interpretation gives the crime rate related to some deviation from the mean % of high school dropouts. For example, if the % dropout rate is 12%, then from <code>model1</code> we obtain</p>
+<p><span class="math display">\[\text{Crime} = 2196.5 + 281.8 \cdot 12 = 5578\]</span></p>
+<p>For <code>model2</code> a 12% dropout rate relates to being <span class="math inline">\(12 - \bar{x} = 1.748%\)</span> higher than the average % dropout rate, and hence we get</p>
+<p><span class="math display">\[\text{Crime} = 5085.2 + 281.8 \cdot 1.748 = 5578\]</span></p>
+<div id="multiple-linear-regression" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Multiple linear regression<a href="optional-reparameterising-the-model.html#multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will now use the crime data to fit a multiple linear regression model, such that</p>
+<p><span class="math display">\[Y_i = \alpha + \beta (x_{1i} - \bar{x}_{1.}) + \gamma (x_{2i} - \bar{x}_{2.}) + \epsilon_i, \quad \epsilon_i \sim N(0, \sigma^2), \quad i = 1,\ldots,n,\]</span></p>
+<p>where the predictors, <span class="math inline">\(x_{1i}\)</span> and <span class="math inline">\(x_{2i}\)</span>, are mean centred.</p>
+<p><strong>QUESTION 2</strong></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Write down the multiple linear regression model using vector-matrix notation:</li>
+</ol>
+<p><span class="math display">\[\underbrace{\begin{bmatrix} &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ \end{bmatrix}}_{\mathbf{Y}} = \underbrace{\begin{bmatrix}
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; \\
+\end{bmatrix}}_{\mathbf{X}} \underbrace{\begin{bmatrix} &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ \end{bmatrix}}_{\boldsymbol\beta} +  \underbrace{\begin{bmatrix} &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ &amp; &amp; \\ \end{bmatrix}}_{\boldsymbol\epsilon} \]</span></p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p><span class="math display">\[\begin{bmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{bmatrix} =
+\begin{bmatrix} 1 &amp; x_{11}-\bar{x}_{1.} &amp; x_{21}-\bar{x}_{2.} \\
+    1 &amp; x_{12}-\bar{x}_{1.} &amp; x_{22}-\bar{x}_{2.} \\
+    \vdots &amp; \vdots &amp; \vdots \\
+    1 &amp; x_{1n}-\bar{x}_{1.} &amp; x_{2n}-\bar{x}_{2.} \\ \end{bmatrix}
+\begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix} +
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}\]</span></p>
+</div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Reparameterise the multiple linear regression built in Question 1(e) and compare the least square estimates of parameters.</li>
+</ol>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>Recap that our original model is given by</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="optional-reparameterising-the-model.html#cb14-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Crime <span class="sc">~</span> Dropout <span class="sc">+</span> Police <span class="sc">+</span> Prison, <span class="at">data =</span> crime)</span></code></pre></div>
+<p>Now we fit the reparameterised model by using:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="optional-reparameterising-the-model.html#cb15-1" aria-hidden="true" tabindex="-1"></a>police.centred <span class="ot">&lt;-</span> crime<span class="sc">$</span>Police <span class="sc">-</span> <span class="fu">mean</span>(crime<span class="sc">$</span>Police)</span>
+<span id="cb15-2"><a href="optional-reparameterising-the-model.html#cb15-2" aria-hidden="true" tabindex="-1"></a>prison.centred <span class="ot">&lt;-</span> crime<span class="sc">$</span>Prison <span class="sc">-</span> <span class="fu">mean</span>(crime<span class="sc">$</span>Prison)</span>
+<span id="cb15-3"><a href="optional-reparameterising-the-model.html#cb15-3" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Crime <span class="sc">~</span> drop.centred <span class="sc">+</span> police.centred <span class="sc">+</span> prison.centred, <span class="at">data =</span> crime)</span></code></pre></div>
+<p>Apart from the intercept, the parameters remain the same.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="optional-reparameterising-the-model.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model1)</span></code></pre></div>
+<pre><code>## (Intercept)     Dropout      Police      Prison 
+## 1513.317509  148.343452    4.782505    2.794514</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="optional-reparameterising-the-model.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model2)</span></code></pre></div>
+<pre><code>##    (Intercept)   drop.centred police.centred prison.centred 
+##    5085.160000     148.343452       4.782505       2.794514</code></pre>
+</div>
+
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exercise-1-the-taste-of-cheese.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["main.pdf", "main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

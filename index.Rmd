@@ -1,0 +1,99 @@
+---
+title: |
+    | S2Y Lab 3
+    | Linear models in vector-matrix form
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+---
+
+```{r setup, include = FALSE}
+library(webexercises)
+library(tinytex)
+library(dplyr)
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+
+
+cheese <- read.csv("cheese.csv")
+```
+
+```{r include=FALSE, echo=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Welcome to S2Y Lab 3
+
+Intended Learning Outcomes:
+
+- write down linear models in vector-matrix form;
+
+- obtain the design matrix using `R`;
+ 
+- obtain least squares estimates of model parameters using vector-matrix form in `R`;
+ 
+- obtain the residual sum of squares using vector-matrix form in `R`.
+
+## Introduction
+
+<!-- In the lectures we learned how to write down linear models in a general way using \textbf{vector-matrix} notation. For example, the following simple linear regression model -->
+<!-- $$Y_i = \alpha + \beta x_i + \epsilon_i, \quad \epsilon_i \sim N(0, \sigma^2), \quad i=1,\ldots,n $$ -->
+
+<!-- can be written in vector-matrix form, such that -->
+
+In the lectures we learned how to write down linear models in a general way using **vector-matrix** notation:
+
+$$\mathbf{Y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\epsilon \quad\quad\quad \text{or} \quad\quad\quad \mathbb{E}(\mathbf{Y}) = \mathbf{X}\boldsymbol\beta$$
+
+where
+
+* $\mathbf{Y}$ is the $(n \times 1)$ vector of observations;
+* $\boldsymbol{\beta}$ is the $(p \times 1)$ vector of parameters;
+* $\mathbf{X}$ is an $(n \times p)$ \textbf{design matrix}, with known constants as elements; and
+* $\boldsymbol{\epsilon}$ is the $(n \times 1)$ vector of random errors.
+
+<!-- A general form for linear models can then be written as -->
+
+<!-- $$\underbrace{\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}}_{\mathbf{Y}} = \underbrace{\begin{bmatrix} -->
+<!--   x_{11} & x_{12} & \cdots & x_{1p} \\ -->
+<!--   x_{21} & x_{22} & \cdots & x_{2p} \\ -->
+<!--   \vdots  & \vdots  & \ddots & \vdots  \\ -->
+<!--   x_{n1} & x_{n2} & \cdots & x_{np}  -->
+<!--  \end{bmatrix}}_{\mathbf{X}} \underbrace{\begin{bmatrix} \beta_1 \\ \beta_2 \\ \vdots \\ \beta_p \end{bmatrix}}_{\boldsymbol \beta} + \underbrace{\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}}_{\boldsymbol \epsilon}$$ -->
+
+<br>
+**TASK 1**
+
+Without looking at the lecture notes, write down the simple linear regression model, i.e. 
+\begin{equation}
+Y_i = \alpha + \beta x_i + \epsilon_i, \quad \epsilon_i \sim N(0, \sigma^2), \quad i=1,\ldots,n
+(\#eq:SLR)
+\end{equation}
+using vector-matrix notation:
+
+$$\underbrace{\begin{bmatrix} & & \\ & & \\ & & \\ & & \\ & & \\ \end{bmatrix}}_{\mathbf{Y}} = \underbrace{\begin{bmatrix}
+& & & & \\ & & & & \\ & & & & \\ & & & & \\ & & & & \\
+ \end{bmatrix}}_{\mathbf{X}} \underbrace{\begin{bmatrix} & & \\ & & \\ & & \\ & & \\ \end{bmatrix}}_{\boldsymbol\beta} +  \underbrace{\begin{bmatrix} & & \\ & & \\ & & \\ & & \\ & & \\ \end{bmatrix}}_{\boldsymbol\epsilon} $$
+<br>
+
+In lectures we also looked at general formulas for obtaining the least squares estimates of the model parameters in terms of vector-matrix notation, which is given as
+
+\begin{equation}
+\boldsymbol{\hat{\beta}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}
+(\#eq:LSE)
+\end{equation}
+
+
+and estimate of the error variance, which is given as
+
+\begin{equation}
+\hat{\sigma}^2=\frac{\text{RSS}}{n-p} =\frac{\mathbf{Y}^\top\mathbf{Y}-\mathbf{Y}^\top\mathbf{X}\boldsymbol{\hat{\beta}}}{n-p}
+(\#eq:sigma)
+\end{equation}
+
+ 

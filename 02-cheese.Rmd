@@ -1,0 +1,15 @@
+# Exercise 1: The taste of cheese
+
+The `cheese` dataset is collected during an experiment involving the chemical constituents of cheese and its taste. It contains the concentrations of acetic acid, hydrogen sulphide (H2S) and lactic acid, as well as a subjective taste score. It is of interest to investigate the effects of the different acids on the taste score.
+
+**TASK 1**
+
+(a) Produce scatterplots of **Taste** against **Lactic Acid** and **Taste** against **H2S**.
+
+(b) Now plot **Taste** against log(**H2S**), and against log(**Lactic Acid**)). 
+
+(c) Choose the best two variables among (**H2S**, log(**H2S**), **Lactic Acid**, log(**Lactic Acid**)) to explain **Taste** and construct a multiple linear regression model using them.
+
+(d) Estimate the parameters in your chosen model using the general formula in vector-matrix notation and check they are same as the `R` output.
+
+(e) Estimate the error variance using the general formula in vector-matrix notation and check that it is same as the `R` output. 

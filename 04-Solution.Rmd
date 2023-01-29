@@ -1,0 +1,62 @@
+# Solution
+
+## Task 1
+
+(a) 
+
+```{r, eval = TRUE}
+# taste vs lactic acid
+plot(Taste ~ Lactic.Acid, data = cheese, xlab = "Lactic acid concentration", ylab = "Taste score")
+
+# taste vs H2S
+plot(Taste ~ H2S, data = cheese, xlab = "H2S concentration", ylab = "Taste score")
+```
+
+(b) 
+
+```{r}
+# taste vs log(lactic acid)
+plot(Taste ~ log(Lactic.Acid), data = cheese, xlab = "Log lactic acid concentration", ylab = "Taste score")
+
+# taste vs log(H2S)
+plot(Taste ~ log(H2S), data = cheese, xlab = "Log H2S concentration", ylab = "Taste score")
+```
+
+(c) Based on the above four plots, it is clear that log(**H2S**) is preferred over **H2S** in explaining **Taste**. The difference between **Lactic Acid** and log(**Lactic Acid**)) is little and therefore we will select the original variable **Lactic Acid** as the predictor. 
+
+To build a multiple linear regression between **Taste** (as the response) and **Lactic Acid** and log(**H2S**) (as the predictors), we use
+```{r}
+model <- lm(Taste ~ Lactic.Acid + log(H2S), data=cheese)
+summary(model)
+```
+
+(d)
+
+```{r, echo=FALSE}
+# calculate according to the formula
+X <- model.matrix(~ Lactic.Acid + log(H2S), data=cheese)
+Y <- cheese$Taste
+
+XtX <- t(X) %*% X
+XtY <- t(X) %*% Y
+
+beta.hat <- solve(XtX) %*% XtY
+beta.hat
+
+#from R output
+coef(model)
+```
+
+(e) 
+```{r}
+# calculate according to the formula
+YtY <- t(Y) %*% Y
+RSS <- YtY - t(XtY) %*% beta.hat
+sigma2_hat <- RSS/(nrow(cheese)-3)
+sigma2_hat
+
+# from R output
+summary(model)$sigma
+```
+
+
