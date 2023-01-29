@@ -30,6 +30,8 @@ model <- lm(Taste ~ Lactic.Acid + log(H2S), data=cheese)
 summary(model)
 ```
 
+When **Lactic Acid** and log(**H2S**) are both zero, the mean cheese taste score is $-27.59$. The mean cheese taste score increases by $19.89$ when **Lactic.Acid** increases by one unit and *all other predictors are held constant*. The mean cheese taste score increases by $3.95$ when log(**H2S**) increases by one unit and *all other predictors are held constant*. 
+
 (d)
 
 ```{r, echo=FALSE}

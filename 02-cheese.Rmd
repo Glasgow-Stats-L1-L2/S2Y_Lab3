@@ -8,7 +8,7 @@ The `cheese` dataset is collected during an experiment involving the chemical co
 
 (b) Now plot **Taste** against log(**H2S**), and against log(**Lactic Acid**)). 
 
-(c) Choose the best two variables among (**H2S**, log(**H2S**), **Lactic Acid**, log(**Lactic Acid**)) to explain **Taste** and construct a multiple linear regression model using them.
+(c) Choose the best two variables among (**H2S**, log(**H2S**), **Lactic Acid**, log(**Lactic Acid**)) to explain **Taste** and construct a multiple linear regression model using them. Interpret the coefficients in the model. 
 
 (d) Estimate the parameters in your chosen model using the general formula in vector-matrix notation and check they are same as the `R` output.
 
